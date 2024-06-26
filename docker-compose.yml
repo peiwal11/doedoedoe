@@ -1,0 +1,33 @@
+version: '2.3'
+services:
+
+  pysr:
+    image: ppy2:latest
+    container_name: pysr-test
+    hostname: pysr-test
+    ports:
+       - "8888:8888"
+       - "8889:8889"
+    networks:
+       - mdk
+
+    #volumes:
+    #  - /data/vscode:/home/root/.vscode
+    restart: always
+    # cpu_count: 2
+    # mem_limit: 4g
+
+  ngi:
+    image: ng1:latest
+    container_name: ngi-test
+    volumes:
+       - /etc/nginx/nginx.conf:/etc/nginx/nginx.conf
+    hostname: ngi-test
+    ports:
+       - "80:80"
+       - "443:443"
+    networks:
+       - mdk
+          driver:bridge
+networks:
+  - mdk  
