@@ -1,4 +1,7 @@
-This is a project of nginx and python server combination.
-One could use ngi build.sh to build an nginx image, and don't forget to use chmod +x build.sh to make sure build.sh could be execute.
-One then use build.sh in py dir to build an python server image, also don't forget to revise the it to be able to execute.
-Finally one could run docker-compose.yml at , to run these two service all in once.
+This project involves combining Nginx and Python servers within Docker containers.
+
+Use the build.sh script in the ngi directory to build the Nginx image. Don't forget to use chmod +x build.sh to make sure build.sh is executable.
+
+Use the build.sh script in the py directory to build the Python server image. Also, remember to make the script executable by revising it accordingly.
+
+Finally, run the docker-compose.yml file in the py directory to start both services at once.
