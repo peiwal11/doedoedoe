@@ -1,8 +1,9 @@
 #!/bin/bash
 set -e
-cd `dirname $0`
+
 
 REGISTRY=registry.inventec
+echo "building nginx image.."
+docker build -t nginximage . 
 
-docker build --rm -f Dockerfile -t ${REGISTRY}/development/samba-test:latest .
-docker push ${REGISTRY}/development/samba-test:latest
+echo "hopefully nginx image build succesfully"

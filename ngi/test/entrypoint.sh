@@ -1,8 +1,8 @@
 #!/bin/sh
-# set -e
+set -e
 
 # 启动SSH
 # /usr/sbin/sshd
 
-python app1.py
+nginx -g "daemon off:"
 
