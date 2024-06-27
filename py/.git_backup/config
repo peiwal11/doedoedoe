@@ -1,0 +1,11 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+[remote "master"]
+	url = https://github.com/peiwal11/doedoedoe.git
+	fetch = +refs/heads/*:refs/remotes/master/*
+[remote "origin"]
+	url = git@github.com:peiwal11/doedoedoe.git
+	fetch = +refs/heads/*:refs/remotes/origin/*

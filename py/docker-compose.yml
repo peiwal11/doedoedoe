@@ -1,0 +1,36 @@
+services:
+  pysr:
+    image: pysrimage:latest
+    
+    hostname: pysr-test
+      #ports:
+      #- "8888:8888"
+    networks:
+      - mdk
+    deploy:
+      mode: replicated
+      replicas: 3
+    command: [ "sh", "-c",  "python app1.py" ]
+    restart: always
+    #volumes:
+    #  - /data/vscode:/home/root/.vscode
+    # cpu_count: 2
+    # mem_limit: 4g
+
+  ngi:
+    image: nginximage:latest
+    container_name: ngi-test
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    hostname: ngi-test
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - mdk
+
+networks:
+  mdk:
+    driver: bridge
+
+
