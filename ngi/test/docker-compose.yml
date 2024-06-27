@@ -1,0 +1,14 @@
+version: '2.3'
+services:
+
+  samba-test:
+    image: registry.inventec/development/samba-test:latest
+    container_name: samba-test
+    hostname: samba-test
+    # ports:
+    #   - "2222:22"
+    volumes:
+      - /data/vscode:/home/root/.vscode
+    restart: always
+    # cpu_count: 2
+    # mem_limit: 4g
