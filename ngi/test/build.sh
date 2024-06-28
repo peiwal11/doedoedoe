@@ -3,7 +3,7 @@ set -e
 
 
 REGISTRY=registry.inventec
-echo "building nginx image.."
+echo "creating nginx image.."
 docker build -t nginximage . 
 
 echo "hopefully nginx image build succesfully"
