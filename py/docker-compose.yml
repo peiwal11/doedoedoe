@@ -1,10 +1,7 @@
 services:
   pysr:
-    image: pysrimage:latest
-    
+    image: pysrimage:latest    
     hostname: pysr-test
-      #ports:
-      #- "8888:8888"
     networks:
       - mdk
     deploy:
@@ -12,11 +9,8 @@ services:
       replicas: 3
     command: [ "sh", "-c",  "python app1.py" ]
     restart: always
-    #volumes:
-    #  - /data/vscode:/home/root/.vscode
-    # cpu_count: 2
-    # mem_limit: 4g
-
+    
+    
   ngi:
     image: nginximage:latest
     container_name: ngi-test
@@ -29,8 +23,40 @@ services:
     networks:
       - mdk
 
+  kong:
+    image: harbor.itc.inventec.net/infra/kong:latest
+      
+    environment:
+      - KONG_DATABASE=off #specifies the type of database that stores kong config
+      - KONG_DECLARATIVE_CONFIG=/kongconfig.yml
+      - KONG_PG_PASSWORD=kongpass #password of postgresql user, need to match postgres_password
+      - KONG_PROXY_ACCESS_LOG=/dev/stdout
+      - KONG_ADMIN_ACCESS_LOG=/dev/stdout #redirect logs to standard output stream
+      - KONG_PROXY_ERROR_LOG=/dev/stderr
+      - KONG_ADMIN_ERROR_LOG=/dev/stderr #redirect logs to linux standard error output stream
+      - KONG_ADMIN_LISTEN=0.0.0.0:8001, 0.0.0.0:8444 ssl #bind addr for admin API
+      - KONG_PROXY_LISTEN=0.0.0.0:8000, 0.0.0.0:8443 ssl #specify where the proxy should listen
+    volumes:
+      - ./kongconfig.yml:/kongconfig.yml
+    ports:
+      - "8000:8000"  #kong proxy over http
+      - "8443:8443"  #kong proxy over https
+      - "8001:8001" #used for admin api over http
+      - "8444:8444" #used for admin api over https
+    healthcheck:
+      test: ["CMD", "./healthcheck.sh"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    networks:
+      - kong_net
+      
+  
+   
+
 networks:
   mdk:
     driver: bridge
-
+  kong_net:
+    driver: bridge
 

@@ -1,0 +1,11 @@
+_format_version: "2.1"
+services:
+  - name: ngi
+    url: http://10.0.2.15:80 #specify upstream URL of service, as url implies protocol, no nned to write protocol
+    routes:
+      - name: nginx_route
+        preserve_host: true
+        methods:
+          - GET
+          - POST
+  
