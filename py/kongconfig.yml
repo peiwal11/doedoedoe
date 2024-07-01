@@ -8,4 +8,28 @@ services:
         methods:
           - GET
           - POST
-  
+
+    plugins:
+      
+      #- name: response-transformer
+      #  config:
+      #    remove:
+      #      headers:
+      #        - Server
+      #    add:
+      #      headers:
+      #        - "X-Error-Message: error occur "
+      #- name: file-log
+      #  config:
+      #    path: /var/log/kong/kong.log
+      #- name: connection-limiting
+      #  config:
+      #    connections: 100
+      #    reject_code: 503
+      #- name: rate-limiting
+      #  config:
+      #    minute: 10
+      #- name: ip-restriction
+      #  config:
+      #    deny:
+      #      - 147.23.14.10      
