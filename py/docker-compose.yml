@@ -55,18 +55,20 @@ services:
       
   keepalived:
     image: registry.inventec/infra/keepalived:2.0.17
-    environment: 
-      KEEPALIVED_INTERFACE: "enp0s3"
-      KEEPALIVED_VIRTUAL_IP: "10.191.7.4"  
+      #    environment: 
+      #KEEPALIVED_INTERFACE: "enp0s3"
+      #KEEPALIVED_VIRTUAL_IP: "10.0.2.231"
     network_mode: host
     cap_add:
       - NET_ADMIN
     volumes:
-      - ./keepalive/keepalive.conf:/etc/keepalived/keepalived.conf
+      - "./keepalive/new.conf:/container/service/keepalived/assets/keepalived.conf:ro"
+      - ./healthcheck.sh:/healthcheck.sh
     logging:
       driver: 'json-file'
       options:
         max-size: 10m    
+    command: --loglevel debug --copy-service
    
 
 networks:
